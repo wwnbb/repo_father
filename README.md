@@ -1,43 +1,49 @@
-[![Upload Python Package](https://github.com/wwnbb/fastapi-throttling/actions/workflows/publish.yml/badge.svg?branch=master)](https://github.com/wwnbb/fastapi-throttling/actions/workflows/publish.yml)
+# Repo Father
 
-## FastAPI Throttling Middleware
 
-FastAPI Throttling Middleware is a rate-limiting middleware for the FastAPI web framework. It uses a Redis server for request tracking and allows you to throttle incoming requests based on IP address and access token.
-Features
+Repo Father is a command-line tool designed to automate the process of repository creation based on template files. It reads from a template folder, prompts the user to select a template, then asks for input for each placeholder in the selected template.
 
-    IP-based throttling: Limit requests based on client's IP address.
-    Token-based throttling: Limit requests based on user access token.
-    Redis integration: Uses Redis as a fast, in-memory data store to track request count.
-    Configurable rate limits: Set your own request limit and time window.
 
+Placeholders are defined as `{{PLACEHOLDER_NAME}}` within the template files. After receiving user input, the tool replaces these placeholders with the user-defined values.
 Installation
 
-First, ensure you have a running Redis server.
 
-Next, install the middleware library.
+Before you can use Repo Father, you need to install it on your system. Here are the steps to do so:
 
 ```bash
-
-pip install fastapi-throttling
-
+git clone https://github.com/your-username/repo_creator.git
+cd repo_creator
+pip install -r requirements.txt
 ```
 
-Usage
 
-Here's a basic example of how to use the middleware:
+#### Usage
 
-```python
 
-from fastapi import FastAPI, Request, HTTPException
-from fastapi_throttling import ThrottlingMiddleware
+To use Repo Creator, follow the below steps:
 
-app = FastAPI()
-app.add_middleware(ThrottlingMiddleware, limit=100, window=60)
+    Run the script with the command:
+
+
+#### Template Creation
+
+To add your own templates, follow these steps:
+
+* Create a new directory in the /templates folder.
+* Add your files and remember to use {{PLACEHOLDER_NAME}} for areas that require user input.
+
+For example, to create a readme file with a custom project name and description, you could create a README.md file like this:
+
+```markdown
+
+# {{PROJECT_NAME}}
+
+{{PROJECT_DESCRIPTION}}
 ```
 
-In this example, the middleware will limit to 100 requests per 60 seconds, either by IP or by user token.
+## Licensing
 
+The code in this project is licensed under:
 
-##### License
-
-GNU LESSER GENERAL PUBLIC LICENSE Version 2.1
+GNU LESSER GENERAL PUBLIC LICENSE
+Version 2.1, February 1999
