@@ -1,0 +1,83 @@
+[tool.poetry]
+name = "repo_father"
+version = "0.1.1"
+description = "create repo from template."
+authors = ["wwnbb <wwnbb@usa.com>"]
+license = "GPLv2"
+readme = "README.md"
+packages = [{include = "repo_father", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11.4"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+ruff = "*"
+black = "*"
+mypy = "*"
+flake8 = "*"
+isort = "*"
+debugpy = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+skip-string-normalization = false
+string-normalization = true
+extend-exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.stubs
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.mypy]
+ignore_missing_imports = true
+python_executable = '.venv/bin/python'
+mypy_path = '.stubs'
+
+[[tool.mypy.overrides]]
+module = 'app'
+disallow_untyped_defs = false
+no_implicit_optional = true
+warn_return_any = true
+check_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = 'tests'
+ignore_errors = true
+
+[tool.ruff]
+select = ["E", "W", "F", "C", "I"]
+line-length = 88
+target-version = "py311"
+ignore = ["C408", "I001"]
+
+exclude = [
+    '__pycache__',
+    '.env',
+    '.venv',
+    '.venv/*',
+]
+
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["E402"]
+
+[tool.pyright]
+venvPath='./'
+venv='.venv'
+useLibrarySourceForTypes = true
+stubPath = ".stubs"
